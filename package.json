@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt --fix",
+    "dev": "nuxt",
     "generate": "nuxt generate",
     "start": "nuxt start",
     "lint": "npm run lint:js",

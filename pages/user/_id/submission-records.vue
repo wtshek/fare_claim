@@ -39,7 +39,6 @@
       <RecordsTable :data="filteredData" :on-edit-bt-click="onEditBtClick" />
     </div>
 
-    <!-- TODO: calendar date title  -->
     <Calendar
       v-else
       id="record-calendar"
@@ -147,7 +146,7 @@ export default {
 #logo {
   width: 100%;
   height: 70px;
-  background: center/ contain no-repeat url('/SARDA_logo_B.png');
+  background: center/ contain no-repeat url('~assets/SARDA_logo_B.png');
 }
 
 #tour-bt {
