@@ -1,8 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Sync Notifications renders the component 1`] = `
-<div class="not-show container">
-  <div class="message">Syncing Data</div>
-  <b-progress type="is-primary" class="progress-bar"></b-progress>
-</div>
-`;
