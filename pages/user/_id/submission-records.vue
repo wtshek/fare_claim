@@ -135,9 +135,6 @@ export default {
         path: `${createRecord.route}?id=${id}`,
       })
     },
-    // goTour() {
-    //   this.$tours.myTour.start()
-    // },
   },
 }
 </script>

@@ -4,12 +4,12 @@
       <div class="date">{{ date }}</div>
       <hr />
       <ul ref="listContainer">
-        <li v-for="item in processedData" :key="item.key">
+        <li v-for="(item, i) in processedData" :key="item.key">
           <ListItem
             :container-ref="$refs.container"
             :item="item"
             :close-modal="closeModal"
-            :scroll-to-edit-menu="scrollToEditMenu"
+            :scroll-to-edit-menu="scrollToEditMenu(i)"
             :on-edit-bt-click="onEditBtClick"
           />
         </li>
@@ -72,11 +72,18 @@ export default {
     closeModal() {
       this.$parent.close()
     },
-    scrollToEditMenu() {
-      this.$nextTick(() => {
-        const el = this.$refs.listContainer
-        el.scrollTo({ top: el.clientHeight, behavior: 'smooth' })
-      })
+    scrollToEditMenu(i) {
+      // returned function not getting this context
+      // need to store the context in this function first
+      const length = this.processedData.length
+      const refs = this.$refs
+      return function () {
+        if (i !== length - 1) return
+        this.$nextTick(() => {
+          const el = refs.listContainer
+          el.scrollTo({ top: el.clientHeight, behavior: 'smooth' })
+        })
+      }
     },
   },
 }

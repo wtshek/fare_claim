@@ -152,16 +152,28 @@ export default {
       // if type change
       this.computedRouteName = ''
     },
+    isRecordEdit(newVal) {
+      if (newVal === true) {
+        this.$store.dispatch('bus/getRouteName')
+        this.$store.dispatch('bus/getOnboardStops')
+        this.$store.dispatch('bus/getAlightStops')
+      }
+    },
   },
   mounted() {
     // this.$store.dispatch('bus/resetRoute')
     // get route name and lang
     this.$store.dispatch('bus/onCreated', this.type)
   },
+  updated() {
+    if (this.inRecordEdit) {
+    }
+    console.log(this.isRecordEdit)
+  },
   methods: {
     onRouteNameSelect(option) {
       // deal with bus, tram, ferry and minibus only
-      this.$store.commit('submit-record/busRecordReset')
+      this.$store.commit('submit-record/resetRecord')
 
       if (option !== null) {
         // get all the info about the selected route
@@ -171,7 +183,7 @@ export default {
           routeIndex: Number(key),
           bounds: inbound ? 'inbound' : 'outbound',
         })
-        this.$store.dispatch('bus/getRouteInfo')
+        this.$store.dispatch('bus/getRouteName')
         this.$store.dispatch('bus/getOnboardStops')
       }
     },

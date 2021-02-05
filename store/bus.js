@@ -80,7 +80,7 @@ export const actions = {
     commit('setLang', rootState.user.lang)
   },
 
-  getRouteInfo({ commit, rootState, dispatch }) {
+  getRouteName({ commit, rootState, dispatch }) {
     const { routeIndex, bounds } = rootState['submit-record'].record
     const { lang } = rootState.user
 
@@ -154,12 +154,9 @@ export const actions = {
     )
 
     const charts = flattenObject(effectiveChart)
-    console.log(charts)
 
     const regex =
       `bounds.` + bounds + `.\\w+:` + onboardStopId + '.\\w+:' + alightStopId
-
-    console.log(regex)
 
     const chartKey = Object.keys(charts).filter((key) => {
       return key.match(new RegExp(regex))

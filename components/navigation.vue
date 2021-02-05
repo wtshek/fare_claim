@@ -67,7 +67,7 @@ export default {
       this.$router.push(route)
     },
     onBackClick() {
-      this.$nuxt.$router.go(-1)
+      this.$nuxt.$router.push('/')
     },
   },
 }
@@ -119,7 +119,7 @@ export default {
 }
 
 .page-name {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 700;
   margin-top: -5px;
   color: $primary-invert;

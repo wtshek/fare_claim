@@ -22,7 +22,7 @@
   margin: 6px 0 0 0;
 
   & .path {
-    stroke: white;
+    stroke: $primary;
     stroke-linecap: round;
     animation: dash 1.5s ease-in-out infinite;
   }

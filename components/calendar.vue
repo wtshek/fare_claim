@@ -18,6 +18,7 @@
               class="spot leading-tight rounded-sm p-1 mt-0 mb-1"
               :class="attr.customData.class"
             ></p>
+            <p v-if="attributes && attributes.length > 6">...</p>
           </div>
         </div>
       </template>
@@ -140,17 +141,35 @@ export default {
 .day-container {
   height: 100%;
   margin-left: 15px;
+  height: 17vw;
 }
 
 .spot-container {
-  display: flex;
+  display: grid;
   width: 100%;
-  overflow: hidden;
+  grid-template-columns: repeat(3, 1fr);
+
+  p:nth-child(n + 7):not(:last-child) {
+    display: none;
+  }
+
+  P:last-child {
+    line-height: 7px;
+    font-size: max(14px, 3vw);
+  }
+
+  @media screen and (max-width: 330px) {
+    grid-template-columns: repeat(2, 1fr);
+
+    p:nth-child(n + 5):not(:last-child) {
+      display: none;
+    }
+  }
 }
 
 .spot {
-  width: min(2vw, 16px);
-  height: min(2vw, 16px);
+  width: min(2vw, 14px);
+  height: min(2vw, 14px);
   overflow: hidden;
   color: $primary-invert;
   border-radius: 10px;

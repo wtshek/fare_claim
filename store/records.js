@@ -76,9 +76,11 @@ export const actions = {
 
   async editRecord(context, record) {
     const oldRecords = await records.getItem(tempRecordsKey)
-    const filtered = oldRecords.filter((item) => item.id !== record.id)
-    console.log(filtered)
-    const res = await records.setItem(tempRecordsKey, [...filtered, record])
+    const mapped = oldRecords.map((item) => {
+      if (item.id === record.id) return record
+      else return item
+    })
+    const res = await records.setItem(tempRecordsKey, mapped)
     return res
   },
 }

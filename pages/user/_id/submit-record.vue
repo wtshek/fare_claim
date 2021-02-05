@@ -66,14 +66,18 @@
           $t('inputLabel.saveRoute')
         }}</b-checkbox>
       </div>
-      <b-button
-        type="is-primary"
-        :disabled="submitDisabled"
-        class="submit"
-        @click="onSubmit"
-        ><Spinner v-if="submitting" />
-        <div v-else>{{ $t('inputLabel.submit') }}</div>
-      </b-button>
+      <div class="submit-container">
+        <b-button
+          type="is-primary"
+          :disabled="submitDisabled"
+          class="submit"
+          @click="onSubmit"
+        >
+          <div>{{ $t('inputLabel.submit') }}</div>
+        </b-button>
+
+        <Spinner v-if="submitting" class="spinner" />
+      </div>
     </form>
     <b-button id="fav-bt" @click.prevent="openScrollMenu">
       <b-icon icon="star" type="is-warning"> </b-icon>
@@ -165,20 +169,13 @@ export default {
         const item = data[key]
         if (item.id === id) {
           this.selectedType = item.typeOfPT
-          this.isRecordEdit = true
           this.$store.commit('submit-record/setRecord', { ...item })
           this.id = id
 
-          // toggle bus ui
-          if (
-            (item.typeOfPT === 'bus' || item.typeOfPT === 'minibus') &&
-            !item.alightStopId &&
-            !item.onboardStopId
-          )
-            this.$store.commit('bus/closeStopSelect')
           break
         }
       }
+      this.isRecordEdit = true
     }
   },
   destroyed() {
@@ -256,7 +253,6 @@ export default {
           id: this.id,
         })
       } else {
-        console.log(record)
         res = await this.$store.dispatch('records/addRecord', {
           ...record,
           status: 'pending',
@@ -315,9 +311,18 @@ section {
   justify-content: center;
 }
 
+.submit-container {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+
+  .spinner {
+    margin-left: 10px;
+  }
+}
+
 .fare,
 .submit {
-  margin-top: 20px;
   min-width: 82px;
 }
 

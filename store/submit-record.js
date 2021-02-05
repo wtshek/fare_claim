@@ -4,7 +4,6 @@ import { defaultType } from '~/utils/constant'
 
 // use method avoid mutation
 const recordOnPTType = (type = defaultType) => {
-  console.log('record', type)
   if (type === 'bus' || type === 'minibus' || type === 'ferry') {
     return {
       routeIndex: -1,
@@ -32,11 +31,7 @@ const recordOnPTType = (type = defaultType) => {
 
 const recordCommon = (typeOf) => ({
   fare: '',
-  // bounds: 'inbound',
-  // routeIndex: -1, // no route index is set
   date: new Date(),
-  // onboardStopId: '',
-  // alightStopId: '',
 })
 
 const getDefaultRecordState = (typeOfPT = defaultType) => {
@@ -56,10 +51,8 @@ export const mutations = {
     state.record = { ...state.record, ...info }
   },
   resetRecord(state, typeOfPT) {
-    state.record = getDefaultRecordState(typeOfPT)
-  },
-  busRecordReset(state) {
-    state.record = getDefaultRecordState(state.typeOfPT)
+    const newRecord = getDefaultRecordState(typeOfPT || state.record.typeOfPT)
+    state.record = { ...newRecord, date: state.record.date }
   },
 }
 
